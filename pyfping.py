@@ -80,7 +80,7 @@ class Fping():
     def _process_data(self):
         for targetline in self.data:
             target = targetline.split(":")[0].strip()
-            print(f"Processing {target}")
+            print("Processing {}".format(target))
             transmitted = int(
                 targetline.split(",")[0].split("=")[1].split("/")[0])
             received = int(
