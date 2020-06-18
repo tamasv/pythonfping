@@ -4,8 +4,6 @@ import argparse
 from influxdb import InfluxDBClient
 import datetime
 import copy
-
-
 """
 This is just a quick script to help debug a complex network loss problem
 """
@@ -35,7 +33,7 @@ class Fping():
         self.data = []
         self.targets = {}
         self.hostname = subprocess.check_output(
-            ['/usr/bin/hostname', '-f']).decode('utf-8').replace('\n', '')
+            ['hostname', '-f'], shell=True).decode('utf-8').replace('\n', '')
         self.influxdata = []
 
     def do(self):
@@ -118,8 +116,7 @@ def main():
     parser.add_argument('range_start',
                         help='Start of the range, e.g. 192.168.0.5')
     parser.add_argument('range_end', help='End of the range, e.g. 192.168.0.5')
-    parser.add_argument('influxdb_host',
-                        help='Influxdb host')
+    parser.add_argument('influxdb_host', help='Influxdb host')
     parser.add_argument('influxdb_port', help='Influxdb port')
     parser.add_argument('influxdb_database', help='Influxdb database')
     parser.add_argument('--size',
@@ -144,8 +141,7 @@ def main():
               interval=args.packet_interval,
               count=args.packet_count)
     f.do()
-    f.push_to_influx(args.influxdb_host,
-                     args.influxdb_port,
+    f.push_to_influx(args.influxdb_host, args.influxdb_port,
                      args.influxdb_database)
 
 
