@@ -40,8 +40,6 @@ class Fping():
         self._run_fping()
         self._process_data()
         self._create_influxdb_data()
-        from pprint import pprint
-        pprint(self.influxdata)
 
     def push_to_influx(self, host, port, database):
         client = InfluxDBClient(host=host, port=port, database=database)
@@ -68,7 +66,8 @@ class Fping():
             str(self.range_start),
             str(self.range_end), '-q'
         ]
-        print(f"Running ping for range {self.range_start} {self.range_end}")
+        print("Running ping for range {} {}".format(self.range_start,
+                                                    self.range_end))
         try:
             output = subprocess.check_output(
                 cmd, stderr=subprocess.STDOUT).decode('utf-8')
