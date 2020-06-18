@@ -60,7 +60,7 @@ class Fping():
     def _run_fping(self):
         cmd = [
             '/usr/bin/fping', '-b',
-            str(self.size), '-M', '-c',
+            str(self.size), '-c',
             str(self.count), '-p',
             str(self.interval), '-g',
             str(self.range_start),
