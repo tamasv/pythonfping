@@ -44,7 +44,7 @@ class Fping():
         pprint(self.influxdata)
 
     def push_to_influx(self, host, port, database):
-        client = InfluxDBClient(host, port, database)
+        client = InfluxDBClient(host=host, port=port, database=database)
         client.write_points(self.influxdata)
 
     def _create_influxdb_data(self):
