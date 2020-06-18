@@ -11,7 +11,7 @@ This is just a quick script to help debug a complex network loss problem
 INFLUXDB_DATA = {
     "measurement": 'fping',
     "tags": {},
-    "time": datetime.datetime.now(),
+    "time": datetime.datetime.utcnow(),
     "fields": {}
 }
 
@@ -55,7 +55,7 @@ class Fping():
                 'host': self.hostname,
                 'target': target
             })
-            influxdata['time'] = datetime.datetime.now()
+            influxdata['time'] = datetime.datetime.utcnow()
             influxdata['fields'].update(targetdata)
             self.influxdata.append(influxdata)
 
